@@ -1,0 +1,5 @@
+{"level":"fatal","ts":"2025-02-06T19:04:00.313+0800","caller":"utils/mongo.go:21","msg":"Failed to connect to MongoDB","error":"error parsing uri: scheme must be \"mongodb\" or \"mongodb+srv\""}
+{"level":"fatal","ts":"2025-02-06T19:04:10.418+0800","caller":"utils/mongo.go:21","msg":"Failed to connect to MongoDB","error":"error parsing uri: scheme must be \"mongodb\" or \"mongodb+srv\""}
+{"level":"info","ts":"2025-02-13T17:29:34.209+0800","caller":"utils/mongo.go:31","msg":"Connected to MongoDB!"}
+{"level":"info","ts":"2025-02-13T17:29:34.220+0800","caller":"myappg/main.go:29","msg":"Starting server on port 8080"}
+{"level":"fatal","ts":"2025-02-13T17:29:34.220+0800","caller":"myappg/main.go:31","msg":"Failed to start server","error":"listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted."}

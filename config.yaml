@@ -1,0 +1,14 @@
+mongodb:
+  uri: "mongodb://localhost:27017"
+  user_db: "user_service"  # 用户数据存储的 MongoDB 数据库
+  order_db: "order_service" # 订单数据存储的 MongoDB 数据库
+
+redis:
+  host: "localhost"
+  port: "6379"
+  password: ""
+  user_db: 0    # 用户数据缓存的 Redis 库
+  order_db: 1   # 订单数据缓存的 Redis 库
+
+server:
+  port: 8083
