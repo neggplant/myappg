@@ -2,7 +2,6 @@ package services
 
 import (
 	"context"
-	"myappg/config"
 	"myappg/models"
 	"myappg/utils"
 
@@ -16,7 +15,7 @@ type UserService struct {
 }
 
 func NewUserService() *UserService {
-	db := GetMongoDB("user")
+	db := utils.GetDB()
 	return &UserService{
 		collection: db.Collection("users"),
 	}
@@ -84,31 +83,4 @@ func (s *UserService) DeleteUser(id string) error {
 
 	_, err = s.collection.DeleteOne(context.Background(), bson.M{"_id": objectID})
 	return err
-}
-
-type OrderService struct{}
-
-func (s *OrderService) GetOrderByID(id string) (*models.Order, error) {
-	var order models.Order
-	cacheKey := "order:" + id
-
-	// 复用通用查询方法
-	err := utils.CacheFirstQuery(
-		context.Background(),
-		config.AppConfig.Redis.OrderDB, // Redis 订单库
-		cacheKey,
-		config.AppConfig.MongoDB.OrderDB, // MongoDB 订单库
-		"orders",
-		&order,
-		func(collection *mongo.Collection) error {
-			objectID, err := primitive.ObjectIDFromHex(id)
-			if err != nil {
-				return err
-			}
-			return collection.FindOne(context.Background(), bson.M{"_id": objectID}).Decode(&order)
-		},
-		30*time.Minute, // 缓存过期时间
-	)
-
-	return &order, err
 }
